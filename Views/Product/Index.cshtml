@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "List of products";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+<h1 class="text-center">List of products</h1>
+<hr />
+<a class="btn btn-success" asp-action="AddProduct"><i class="fa-solid fa-circle-plus" style="padding:5px"></i>Add New Product</a>
+<br />
+<br />
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Brand</th>
+        <th class="text-center">Price</th>
+        <th class="text-center">Stock</th>
+        <th class="text-center">Category</th>
+        <th class="text-center">Actions</th>
+    </tr>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th class="text-center">@item.ID</th>
+                <td class="text-center">@item.Name</td>
+                <td class="text-center">@item.Brand</td>
+                <td class="text-center">@item.Price</td>
+                <td class="text-center">@item.Stock</td>
+                <td class="text-center">@item.CategoryID</td>
+                <td class="text-center">
+                    <a class="btn btn-info text-white" asp-action="Detail" asp-route-id="@item.ID"><i class="fa-solid fa-eye" style="padding:5px"></i>DETAIL</a>
+                    <a class="btn btn-secondary text-white" asp-action="Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen-to-square" style="padding:5px"></i>EDIT</a>
+                    <a href="/Product/Delete/@item.ID" class="btn btn-danger"><i class="fa-solid fa-trash" style="padding:5px"></i>DELETE</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
